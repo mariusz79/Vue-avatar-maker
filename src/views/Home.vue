@@ -1,18 +1,32 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="container">
+    <div class="input">
+      <input name="input" id="input" v-model="inputValue" @keyup.enter="handleInput"/>
+      <button class="generate-button">Generate</button>
+    </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue';
-
 export default {
-  name: 'Home',
-  components: {
-    HelloWorld,
+  name: 'App',
+  data() {
+    return {
+      inputValue: '',
+      results: [],
+    };
+  },
+  methods: {
+    handleInput() {
+      console.log(this.inputValue);
+    },
   },
 };
 </script>
+
+<style lang="scss" scoped>
+  .container{
+    display: flex;
+    justify-content: center;
+  }
+</style>
