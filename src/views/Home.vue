@@ -3,7 +3,7 @@
     <Info />
     <div class="input">
       <input name="input" id="input" v-model="inputValue" @keyup.enter="handleInput()"/>
-      <button class="generate-button" @click="handleInput()">Generate</button>
+      <button class="generate-button" @click="handleInput()">Try</button>
       <input type="checkbox" id="roundedValue" v-model="roundedValue" @click="handleInput();
        handleRounded();">
       <label for="roundedValue">Rounded</label>
@@ -13,6 +13,13 @@
       <input type="checkbox" id="boldValue" v-model="boldValue" @click="handleInput();
        handleBold();">
       <label for="boldValue">Bold</label>
+       <circle-slider :min="16"
+            :max="512"
+            :step-size="1"
+            id="sizeValue" v-model="sizeValue" @mousedown="handleInput();
+       handleSize();"></circle-slider>
+      <div>{{ sizeValue }}</div>
+      <button class="generate-button" @click="handleInput()">Generate</button>
     </div>
      <div class="result" v-if="result">
       <img v-bind:src=result>
@@ -23,6 +30,10 @@
 <script>
 import Info from '@/components/Info.vue';
 import axios from 'axios';
+import VueCircleSlider from 'vue-circle-slider';
+import Vue from 'vue';
+
+Vue.use(VueCircleSlider);
 
 export default {
   name: 'App',
@@ -35,12 +46,13 @@ export default {
       roundedValue: false,
       uppercaseValue: false,
       boldValue: false,
+      sizeValue: 64,
       result: [],
     };
   },
   methods: {
     handleInput() {
-      axios.get(`https://eu.ui-avatars.com/api/?name=${this.inputValue}&rounded=${this.roundedValue}&bold=${this.boldValue}&uppercase=${this.uppercaseValue}`)
+      axios.get(`https://eu.ui-avatars.com/api/?name=${this.inputValue}&rounded=${this.roundedValue}&bold=${this.boldValue}&uppercase=${this.uppercaseValue}&size=${this.sizeValue}`)
         .then((response) => {
           this.result = (response.config.url);
         })
@@ -58,6 +70,9 @@ export default {
     },
     handleBold() {
       this.boldValue = !this.boldValue;
+      this.handleInput();
+    },
+    handleSize() {
       this.handleInput();
     },
   },
