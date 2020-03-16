@@ -16,11 +16,14 @@
        <circle-slider :min="16"
             :max="512"
             :step-size="1"
-            id="sizeValue" v-model="sizeValue" @mousedown="handleInput();
-       handleSize();"></circle-slider>
+            id="sizeValue" v-model="sizeValue"></circle-slider>
       <div>{{ sizeValue }}</div>
       <button class="generate-button" @click="handleInput()">Generate</button>
     </div>
+    <div>
+    <swatches v-model="background"></swatches>
+    <swatches v-model="color"></swatches>
+  </div>
      <div class="result" v-if="result">
       <img v-bind:src=result>
     </div>
@@ -32,13 +35,16 @@ import Info from '@/components/Info.vue';
 import axios from 'axios';
 import VueCircleSlider from 'vue-circle-slider';
 import Vue from 'vue';
+import Swatches from 'vue-swatches';
+import 'vue-swatches/dist/vue-swatches.min.css';
 
 Vue.use(VueCircleSlider);
+Vue.use(Swatches);
 
 export default {
   name: 'App',
   components: {
-    Info,
+    Info, Swatches,
   },
   data() {
     return {
@@ -47,12 +53,18 @@ export default {
       uppercaseValue: false,
       boldValue: false,
       sizeValue: 64,
+      background: '#1CA085',
+      color: '#F493A7',
       result: [],
     };
   },
   methods: {
     handleInput() {
-      axios.get(`https://eu.ui-avatars.com/api/?name=${this.inputValue}&rounded=${this.roundedValue}&bold=${this.boldValue}&uppercase=${this.uppercaseValue}&size=${this.sizeValue}`)
+      const backgroundColor = this.background.slice(1);
+      const fontColor = this.color.slice(1);
+      axios.get(`https://eu.ui-avatars.com/api/?name=${this.inputValue}
+      &rounded=${this.roundedValue}&bold=${this.boldValue}&uppercase=${this.uppercaseValue}
+      &size=${this.sizeValue}&background=${backgroundColor}&color=${fontColor}`)
         .then((response) => {
           this.result = (response.config.url);
         })
