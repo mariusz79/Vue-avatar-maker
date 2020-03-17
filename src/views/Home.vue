@@ -27,6 +27,7 @@
      <div class="result" v-if="result">
       <img v-bind:src=result>
     </div>
+    <button @click="post()">Post</button>
   </div>
 </template>
 
@@ -56,6 +57,8 @@ export default {
       background: '#1CA085',
       color: '#F493A7',
       result: [],
+      user: 'q',
+      body: '2',
     };
   },
   methods: {
@@ -86,6 +89,17 @@ export default {
     },
     handleSize() {
       this.handleInput();
+    },
+    post() {
+      axios.post(`https://vue-avatar-maker.firebaseio.com/${this.user}.json`, {
+        user: this.user,
+        body: this.body,
+      }).then((data) => {
+        console.log(data);
+      })
+        .catch((error) => {
+          console.log(error);
+        });
     },
   },
 };
