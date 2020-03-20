@@ -28,6 +28,9 @@
       <img v-bind:src=result>
     </div>
     <button @click="post()">Post</button>
+    <button @click="get()">Get</button>
+    <button @click="pri()">P</button>
+    <div v-if="blo">{{blo}}</div>
   </div>
 </template>
 
@@ -57,8 +60,9 @@ export default {
       background: '#1CA085',
       color: '#F493A7',
       result: [],
-      user: 'q',
+      user: '',
       body: '2',
+      blo: [],
     };
   },
   methods: {
@@ -90,13 +94,28 @@ export default {
     handleSize() {
       this.handleInput();
     },
+    pri() {
+      console.log(this.$auth.user.nickname);
+    },
     post() {
+      console.log(this.$auth.user.nickname);
+      this.user = this.$auth.user.nickname;
       axios.post(`https://vue-avatar-maker.firebaseio.com/${this.user}.json`, {
-        user: this.user,
         body: this.body,
       }).then((data) => {
         console.log(data);
       })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    get() {
+      this.user = this.$auth.user.nickname;
+      axios.get(`https://vue-avatar-maker.firebaseio.com/${this.user}.json`)
+        .then((data) => {
+          this.blo.push(data);
+          console.log(data);
+        })
         .catch((error) => {
           console.log(error);
         });
