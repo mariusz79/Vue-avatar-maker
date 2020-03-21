@@ -30,7 +30,7 @@
     <button @click="post()">Post</button>
     <button @click="get()">Get</button>
     <button @click="pri()">P</button>
-    <div v-if="blo">{{blo}}</div>
+    <div v-if="user">{{userdata}}</div>
   </div>
 </template>
 
@@ -62,7 +62,7 @@ export default {
       result: [],
       user: '',
       body: '2',
-      blo: [],
+      userdata: [],
     };
   },
   methods: {
@@ -112,9 +112,9 @@ export default {
     get() {
       this.user = this.$auth.user.nickname;
       axios.get(`https://vue-avatar-maker.firebaseio.com/${this.user}.json`)
-        .then((data) => {
-          this.blo.push(data);
-          console.log(data);
+        .then((response) => {
+          this.userdata.push(response.data);
+          console.log(response.data);
         })
         .catch((error) => {
           console.log(error);
@@ -130,5 +130,6 @@ export default {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    margin-top: 50px;
   }
 </style>
