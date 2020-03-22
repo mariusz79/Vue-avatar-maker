@@ -1,7 +1,6 @@
 <template>
   <div class="info">
-    <h1>UI Avatars</h1>
-    <p>Generate avatars with initials from names.</p>
+    <h3>Generate avatars with initials from names.</h3>
   </div>
 </template>
 
@@ -12,5 +11,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+  .info{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+  }
 </style>

@@ -53,7 +53,7 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: aqua;
+    background: #cae8e2;
     height: 170px;
     transition: height 0.3s ease-in-out;
   }
@@ -67,13 +67,12 @@ export default {
   }
   a{
     text-decoration: none;
-    color: blueviolet;
+    color: #1fbc9c;
     font-size: 20px;
   }
   .left, .right, .login{
     margin-top: 20px;
     display: block;
-    transition: 0.3s;
   }
   .hide{
     visibility: hidden;
@@ -118,8 +117,11 @@ export default {
     visibility: visible;
     opacity: 1;
   }
-  .right, .login{
+  .left, .right, .login, .navShort .left{
     margin-top: 0;
+  }
+  .right{
+    display: flex;
   }
   .aboutLink{
     margin-right: 18px;

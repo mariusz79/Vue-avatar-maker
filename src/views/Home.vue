@@ -1,31 +1,47 @@
 <template>
   <div class="container">
     <Info />
-    <div class="input">
-      <input name="input" id="input" v-model="inputValue" @keyup.enter="handleInput()"/>
+    <div class="inputs">
+      <input type="text" name="input" id="input" placeholder="Type your name..."
+      v-model="inputValue" @keyup.enter="handleInput()"/>
       <button class="generate-button" @click="handleInput()">Try</button>
-      <input type="checkbox" id="roundedValue" v-model="roundedValue" @click="handleInput();
-       handleRounded();">
+    </div>
+    <div class="checkboxes">
+      <input type="checkbox" id="roundedValue" v-model="roundedValue"
+      :class="{'checkboxActive':roundedValue}" @click="handleInput(); handleRounded();">
       <label for="roundedValue">Rounded</label>
       <input type="checkbox" id="uppercaseValue" v-model="uppercaseValue" @click="handleInput();
-       handleUppercase();">
-      <label for="uppercaseValue">Uppercase</label>
+       handleUppercase();" :class="{'checkboxActive':uppercaseValue}">
+      <label class="uppercaseValue" for="uppercaseValue">Uppercase</label>
       <input type="checkbox" id="boldValue" v-model="boldValue" @click="handleInput();
-       handleBold();">
+       handleBold();" :class="{'checkboxActive':boldValue}">
       <label for="boldValue">Bold</label>
-       <circle-slider :min="16"
+    </div>
+    <div class="custom">
+      <div class="colors">
+      <div class="backgroundColors">
+      <div><swatches v-model="background"></swatches></div><p class="description">Background</p>
+      </div>
+      <div class="lettersColors">
+      <div><swatches v-model="color"></swatches></div><p class="description">Color</p>
+      </div>
+      </div>
+      <div class="slider">
+       <div><circle-slider :min="16"
             :max="512"
             :step-size="1"
-            id="sizeValue" v-model="sizeValue"></circle-slider>
-      <div>{{ sizeValue }}</div>
+            id="sizeValue" v-model="sizeValue"></circle-slider></div>
+            <p class="sizeValue">Size: {{ sizeValue }}</p>
+        </div>
+    </div>
+    <div class="genButton">
       <button class="generate-button" @click="handleInput()">Generate</button>
     </div>
-    <div>
-    <swatches v-model="background"></swatches>
-    <swatches v-model="color"></swatches>
-  </div>
+    <div class="showResult">
      <div class="result" v-if="result">
       <img v-bind:src=result>
+    </div>
+    <div class="card"></div>
     </div>
     <button @click="post()">Post</button>
     <button @click="get()">Get</button>
@@ -57,8 +73,8 @@ export default {
       uppercaseValue: false,
       boldValue: false,
       sizeValue: 64,
-      background: '#1CA085',
-      color: '#F493A7',
+      background: '#1fbc9c',
+      color: '#dde6e8',
       result: [],
       user: '',
       body: '2',
@@ -126,10 +142,95 @@ export default {
 
 <style lang="scss" scoped>
   .container{
+    margin-top: 50px;
+  }
+  .inputs, .checkboxes, .genButton, .showResult{
     display: flex;
     justify-content: center;
-    align-items: center;
+    margin-top: 15px;
+  }
+  #input{
+    min-width: 50vw;
+  }
+  .backgroundColors, .lettersColors{
+    display: flex;
+  }
+  .custom{
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 15px;
+  }
+  .colors{
+    display: flex;
     flex-direction: column;
-    margin-top: 50px;
+    margin-left: 10vw;
+  }
+  .description{
+    margin-left: 5px;
+  }
+  p, input, button {
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: -0.2px;
+    font-size: 16px;
+  }
+  input {
+  margin-right: 16px/2;
+  box-shadow:  inset 2px 2px 5px #BABECC, inset -5px -5px 10px #FFF;
+  box-sizing: border-box;
+  transition: all 0.2s ease-in-out;
+  appearance: none;
+  -webkit-appearance: none;
+ }
+ input[type="text"]:focus {
+    box-shadow:  inset 1px 1px 2px #BABECC, inset -1px -1px 2px #FFF;
+  }
+ button {
+  color:#61677C;
+  font-weight: bold;
+  box-shadow: -5px -5px 20px #FFF,  5px 5px 20px  #BABECC;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  font-weight: 600;
+  &:hover {
+    box-shadow: -2px -2px 5px #FFF, 2px 2px 5px  #BABECC;
+  }
+  &:active {
+    box-shadow: inset 1px 1px 2px  #BABECC, inset -1px -1px 2px #FFF;
+  }
+ }
+ button, input {
+  border: 0;
+  outline: 0;
+  font-size: 16px;
+  border-radius: 16px*20;
+  padding: 16px;
+  background-color: #EBECF0;
+  text-shadow: 1px 1px 0 #FFF;;
+  }
+  .checkboxActive {
+    box-shadow:  inset 1px 1px 2px rgb(89, 172, 95), inset -1px -1px 2px rgb(6, 226, 68);
+  }
+  .card{
+    width: 300px;
+    height: 300px;
+    box-shadow: -2px -2px 5px #FFF, 2px 2px 5px  #BABECC;
+  }
+  .sizeValue{
+    position: relative;
+    top: 22px;
+    right: 76px;
+    color: darkcyan;
+  }
+  .checkboxes label{
+    margin-top: 10px;
+  }
+  .slider{
+    display: flex;
+  }
+  #uppercaseValue{
+    margin-left: 3vw;
+  }
+  .uppercaseValue{
+    margin-right: 3vw;
   }
 </style>
