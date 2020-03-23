@@ -53,7 +53,8 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: #cae8e2;
+    background: #efeff5;
+    box-shadow: 0 2px 2px -2px rgba(0,0,0,.2);
     height: 170px;
     transition: height 0.3s ease-in-out;
   }
@@ -89,7 +90,7 @@ export default {
 .bar1, .bar2, .bar3 {
   width: 35px;
   height: 5px;
-  background-color: #333;
+  background-color: grey;
   margin: 6px 0;
   transition: all 0.3s ease-in;
 }
@@ -111,7 +112,7 @@ export default {
   }
   .nav{
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
   }
   .hide{
     visibility: visible;

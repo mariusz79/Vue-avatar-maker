@@ -1,21 +1,22 @@
 <template>
   <div class="container">
+    <div class="insideContainer">
     <Info />
     <div class="inputs">
       <input type="text" name="input" id="input" placeholder="Type your name..."
       v-model="inputValue" @keyup.enter="handleInput()"/>
-      <button class="generate-button" @click="handleInput()">Try</button>
     </div>
     <div class="checkboxes">
       <input type="checkbox" id="roundedValue" v-model="roundedValue"
       :class="{'checkboxActive':roundedValue}" @click="handleInput(); handleRounded();">
-      <label for="roundedValue">Rounded</label>
+      <label for="roundedValue" :class="{'grey':!roundedValue}">Rounded</label>
       <input type="checkbox" id="uppercaseValue" v-model="uppercaseValue" @click="handleInput();
        handleUppercase();" :class="{'checkboxActive':uppercaseValue}">
-      <label class="uppercaseValue" for="uppercaseValue">Uppercase</label>
+      <label class="uppercaseValue" :class="{'grey':!uppercaseValue}"
+      for="uppercaseValue">Uppercase</label>
       <input type="checkbox" id="boldValue" v-model="boldValue" @click="handleInput();
        handleBold();" :class="{'checkboxActive':boldValue}">
-      <label for="boldValue">Bold</label>
+      <label for="boldValue" :class="{'grey':!boldValue}">Bold</label>
     </div>
     <div class="custom">
       <div class="colors">
@@ -35,18 +36,20 @@
         </div>
     </div>
     <div class="genButton">
-      <button class="generate-button" @click="handleInput()">Generate</button>
+      <button class="generateButton" @click="handleInput()">Generate</button>
     </div>
     <div class="showResult">
      <div class="result" v-if="result">
       <img v-bind:src=result>
     </div>
-    <div class="card"></div>
     </div>
+    <!--
     <button @click="post()">Post</button>
     <button @click="get()">Get</button>
     <button @click="pri()">P</button>
+    -->
     <div v-if="user">{{userdata}}</div>
+  </div>
   </div>
 </template>
 
@@ -143,14 +146,19 @@ export default {
 <style lang="scss" scoped>
   .container{
     margin-top: 50px;
+    display: flex;
+    justify-content: center;
   }
   .inputs, .checkboxes, .genButton, .showResult{
     display: flex;
     justify-content: center;
     margin-top: 15px;
   }
+  .showResult{
+    margin-top: 30px;
+  }
   #input{
-    min-width: 50vw;
+    min-width: 35vw;
   }
   .backgroundColors, .lettersColors{
     display: flex;
@@ -163,13 +171,12 @@ export default {
   .colors{
     display: flex;
     flex-direction: column;
-    margin-left: 10vw;
+    margin-left: 6vw;
   }
   .description{
     margin-left: 5px;
   }
   p, input, button {
-    font-family: 'Montserrat', sans-serif;
     letter-spacing: -0.2px;
     font-size: 16px;
   }
@@ -185,7 +192,7 @@ export default {
     box-shadow:  inset 1px 1px 2px #BABECC, inset -1px -1px 2px #FFF;
   }
  button {
-  color:#61677C;
+  color:#11AE8E;
   font-weight: bold;
   box-shadow: -5px -5px 20px #FFF,  5px 5px 20px  #BABECC;
   transition: all 0.2s ease-in-out;
@@ -211,8 +218,8 @@ export default {
     box-shadow:  inset 1px 1px 2px rgb(89, 172, 95), inset -1px -1px 2px rgb(6, 226, 68);
   }
   .card{
-    width: 300px;
-    height: 300px;
+    display: flex;
+    padding: 16px;
     box-shadow: -2px -2px 5px #FFF, 2px 2px 5px  #BABECC;
   }
   .sizeValue{
@@ -232,5 +239,22 @@ export default {
   }
   .uppercaseValue{
     margin-right: 3vw;
+  }
+  .insideContainer{
+    max-width: 800px;
+  }
+  .generateButton{
+    width: 200px;
+  }
+  .grey{
+    color: grey;
+  }
+  @media (max-width: 600px) {
+    #input{
+      min-width: 71vw;
+    }
+    .colors{
+      margin-left: 18vw;
+    }
   }
 </style>
