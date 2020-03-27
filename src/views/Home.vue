@@ -8,14 +8,14 @@
     </div>
     <div class="checkboxes">
       <input type="checkbox" id="roundedValue" v-model="roundedValue"
-      :class="{'checkboxActive':roundedValue}" @click="handleInput(); handleRounded();">
+      :class="{'checkboxActive':roundedValue}" @click="handleRounded();">
       <label for="roundedValue" :class="{'grey':!roundedValue}">Rounded</label>
-      <input type="checkbox" id="uppercaseValue" v-model="uppercaseValue" @click="handleInput();
-       handleUppercase();" :class="{'checkboxActive':uppercaseValue}">
+      <input type="checkbox" id="uppercaseValue" v-model="uppercaseValue"
+      @click="handleUppercase();" :class="{'checkboxActive':uppercaseValue}">
       <label class="uppercaseValue" :class="{'grey':!uppercaseValue}"
       for="uppercaseValue">Uppercase</label>
-      <input type="checkbox" id="boldValue" v-model="boldValue" @click="handleInput();
-       handleBold();" :class="{'checkboxActive':boldValue}">
+      <input type="checkbox" id="boldValue" v-model="boldValue"
+      @click="handleBold();" :class="{'checkboxActive':boldValue}">
       <label for="boldValue" :class="{'grey':!boldValue}">Bold</label>
     </div>
     <div class="custom">
@@ -42,12 +42,11 @@
      <div class="result" v-if="result">
       <img v-bind:src=result>
     </div>
+    <p>Right-click on avatar and select 'Save image as ...'</p>
     </div>
-    <!--
-    <button @click="post()">Post</button>
+    <button @click="post()">Save</button>
     <button @click="get()">Get</button>
     <button @click="pri()">P</button>
-    -->
     <div v-if="user">{{userdata}}</div>
   </div>
   </div>
@@ -156,6 +155,13 @@ export default {
   }
   .showResult{
     margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+
+    p{
+      color: grey;
+    }
   }
   #input{
     min-width: 35vw;
@@ -193,7 +199,6 @@ export default {
   }
  button {
   color:#11AE8E;
-  font-weight: bold;
   box-shadow: -5px -5px 20px #FFF,  5px 5px 20px  #BABECC;
   transition: all 0.2s ease-in-out;
   cursor: pointer;

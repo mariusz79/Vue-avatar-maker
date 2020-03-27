@@ -10,7 +10,7 @@
       also available.<br>
       To make it a little more complicated, I would add user authorisation in case if user
       wants to keep a history of all the avatars he has generated.</p>
-       <h4>Technologies used:</h4>
+       <h4 class="title" style="font-size: 20px;">Technologies used:</h4>
       <div class="technologies">
         <div class="card">
           <img src="https://upload.wikimedia.org/wikipedia/commons/9/95/Vue.js_Logo_2.svg"/>
@@ -39,6 +39,7 @@
 <style lang="scss">
   .about{
     max-width: 800px;
+    padding: 15px;
   }
   .container{
     margin-top: 50px;
@@ -46,6 +47,7 @@
     justify-content: center;
   }
   .title{
+    text-align: center;
     font-size: 29px;
     color:#1fbc9c;
     text-shadow: -4px -4px 10px rgba(255, 254, 255, 0.6), 0.7px 1px 1px
