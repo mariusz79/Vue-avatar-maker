@@ -1,11 +1,7 @@
 <template>
 <div>
-  <div class="showResult">
-     <div class="result" v-if="result">
-      <img v-bind:src=result>
-    </div>
-    <p>Right-click on avatar and select 'Save image as ...'</p>
-  </div>
+ <div class="display">
+        </div>
 </div>
 </template>
 
@@ -13,8 +9,8 @@
 export default {
   name: 'Display',
   props: {
-    result: {
-      type: String,
+    item: {
+      type: Object,
       required: true,
     },
   },

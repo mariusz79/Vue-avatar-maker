@@ -44,10 +44,17 @@
     </div>
     <p>Right-click on avatar and select 'Save image as ...'</p>
     </div>
+    <div v-if="$auth.isAuthenticated && result!=''" class="save">
     <button @click="post()">Save</button>
-    <button @click="get()">Get</button>
-    <button @click="pri()">P</button>
-    <div v-if="user">{{userdata}}</div>
+    </div>
+    <div v-if="$auth.isAuthenticated" class="history">
+      <button @click="get()">Load your avatars</button>
+      <div class="items">
+      <div v-for="key in userdata" :key="userdata[key]">
+        <img v-bind:src=key.body class="item">
+        </div>
+      </div>
+    </div>
   </div>
   </div>
 </template>
@@ -79,11 +86,18 @@ export default {
       color: '#dde6e8',
       result: [],
       user: '',
-      body: '2',
+      body: '',
       userdata: [],
+      item: {
+        type: Object,
+        required: true,
+      },
     };
   },
   methods: {
+    login() {
+      this.$auth.loginWithRedirect();
+    },
     handleInput() {
       const backgroundColor = this.background.slice(1);
       const fontColor = this.color.slice(1);
@@ -119,7 +133,7 @@ export default {
       console.log(this.$auth.user.nickname);
       this.user = this.$auth.user.nickname;
       axios.post(`https://vue-avatar-maker.firebaseio.com/${this.user}.json`, {
-        body: this.body,
+        body: this.result,
       }).then((data) => {
         console.log(data);
       })
@@ -131,7 +145,7 @@ export default {
       this.user = this.$auth.user.nickname;
       axios.get(`https://vue-avatar-maker.firebaseio.com/${this.user}.json`)
         .then((response) => {
-          this.userdata.push(response.data);
+          this.userdata = response.data;
           console.log(response.data);
         })
         .catch((error) => {
@@ -253,6 +267,20 @@ export default {
   }
   .grey{
     color: grey;
+  }
+  .history{
+    margin-top: 15px;
+    text-align: center;
+  }
+  .save{
+    text-align: center;
+  }
+  .items{
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .item{
+    margin: 10px;
   }
   @media (max-width: 600px) {
     #input{
