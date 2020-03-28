@@ -106,9 +106,6 @@ export default {
       &size=${this.sizeValue}&background=${backgroundColor}&color=${fontColor}`)
         .then((response) => {
           this.result = (response.config.url);
-        })
-        .catch((error) => {
-          console.log(error);
         });
     },
     handleRounded() {
@@ -126,30 +123,17 @@ export default {
     handleSize() {
       this.handleInput();
     },
-    pri() {
-      console.log(this.$auth.user.nickname);
-    },
     post() {
-      console.log(this.$auth.user.nickname);
       this.user = this.$auth.user.nickname;
       axios.post(`https://vue-avatar-maker.firebaseio.com/${this.user}.json`, {
         body: this.result,
-      }).then((data) => {
-        console.log(data);
-      })
-        .catch((error) => {
-          console.log(error);
-        });
+      });
     },
     get() {
       this.user = this.$auth.user.nickname;
       axios.get(`https://vue-avatar-maker.firebaseio.com/${this.user}.json`)
         .then((response) => {
           this.userdata = response.data;
-          console.log(response.data);
-        })
-        .catch((error) => {
-          console.log(error);
         });
     },
   },
