@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
     <title>
         <%= htmlWebpackPlugin.options.title %>
     </title>
@@ -13,6 +14,21 @@
         body {
             margin: 0;
             background-color: #EBECF0;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        body::after {
+            content: "";
+            background-image: url("https://cdn.pixabay.com/photo/2017/09/24/19/17/pencil-2782840_960_720.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            opacity: 0.3;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            position: absolute;
+            z-index: -1;
         }
     </style>
 </head>

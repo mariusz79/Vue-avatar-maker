@@ -2,15 +2,16 @@
 <div class="container">
   <div class="about">
     <h3 class="title">This is an about page</h3>
-    <p>There’s a cool little service, <a href="https://eu.ui-avatars.com/">UI Avatars</a>, that lets you generate
-      avatars with initials from names on the fly without any kind of backend process.
-      It has a simple-to-use API.<br>
-      The goal of the app I build is to let a user enter name or surname, or both,
+    <p style="margin-top: 30px;">
+      The goal of the app is to let a user enter name or surname, or both,
       and then press a button that generates the avatar. More customization options are
-      also available.<br>
+      also available.<br><br>
+      The app is using a cool little service, <a href="https://eu.ui-avatars.com/">UI Avatars</a>,
+      that lets you generate avatars with initials from names on the fly without any kind
+      of backend process and has a simple-to-use API.<br><br>
       To make it a little more complicated, I would add user authorisation in case if user
       wants to keep a history of all the avatars he has generated.</p>
-       <h4 class="title" style="font-size: 20px;">Technologies used:</h4>
+       <h4 class="title" style="font-size: 20px; margin-top: 50px;">Technologies used:</h4>
       <div class="technologies">
         <div class="card">
           <img src="https://upload.wikimedia.org/wikipedia/commons/9/95/Vue.js_Logo_2.svg"/>
@@ -54,6 +55,9 @@
      rgba(35, 64, 94, 0.075), 3.5px 5px 3px
      rgba(35, 64, 94, 0.06), 6.3px 9px 5px rgba(35, 64, 94, 0.055), 9.1px 13px 7px
      rgba(35, 64, 94, 0.05), 11.9px 17px 9px rgba(35, 64, 94, 0.05);
+  }
+  .about>p{
+    font-size: 18px;
   }
   .technologies{
     display: flex;

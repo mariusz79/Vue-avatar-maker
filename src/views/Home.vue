@@ -83,7 +83,7 @@ export default {
       boldValue: false,
       sizeValue: 64,
       background: '#1fbc9c',
-      color: '#dde6e8',
+      color: '#BDC3C8',
       result: [],
       user: '',
       body: '',
@@ -196,7 +196,7 @@ export default {
   .description{
     margin-left: 5px;
   }
-  p, input, button {
+  input, button {
     letter-spacing: -0.2px;
     font-size: 16px;
   }
